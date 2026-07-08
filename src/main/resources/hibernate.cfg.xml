@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!-- ============================================================
+             Choix du SGBD : SEUL CE FICHIER change selon la base.
+             Le code metier ne depend jamais du SGBD.
+             ============================================================ -->
+
+        <!-- ===== PostgreSQL (configuration active) ===== -->
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/daara</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">root</property>
+
+        <!-- ===== MySQL (decommentez pour utiliser MySQL) =====
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/daara</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">root</property>
+        -->
+
+        <!-- ===== Oracle (decommentez pour utiliser Oracle) =====
+        <property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property>
+        <property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:XE</property>
+        <property name="hibernate.connection.username">system</property>
+        <property name="hibernate.connection.password">root</property>
+        -->
+
+        <!-- Comportement commun -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+
+        <!-- Entites JPA gerees -->
+        <mapping class="sn.l2gl.aida.daara.model.models.Maitre"/>
+        <mapping class="sn.l2gl.aida.daara.model.models.Classe"/>
+        <mapping class="sn.l2gl.aida.daara.model.models.Talibe"/>
+        <mapping class="sn.l2gl.aida.daara.model.models.Progression"/>
+    </session-factory>
+</hibernate-configuration>

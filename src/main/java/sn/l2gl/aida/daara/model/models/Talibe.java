@@ -1,18 +1,30 @@
-package models;
-import jakarta.persistence.*;
+package sn.l2gl.aida.daara.model.models;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 import java.time.LocalDate;
 
+/**
+ * Talibe (eleve) rattache a une classe.
+ * Cle primaire = matricule saisi par l'utilisateur (ex : "T0001").
+ */
 @Entity
 @Table(name = "talibes")
 public class Talibe {
 
     @Id
-    @Column(length = 20)
-    private String matricule;
+    @Column(length = 200, unique = true)
+    private String matricule; // cle saisie
 
+    @Column(nullable = false)
     private String prenom;
 
+    @Column(nullable = false)
     private String nom;
 
     private LocalDate dateNaissance;
@@ -21,7 +33,7 @@ public class Talibe {
 
     private String telephoneTuteur;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false) // un talibe appartient a 1 classe
     @JoinColumn(name = "classe_code")
     private Classe classe;
 
@@ -96,8 +108,9 @@ public class Talibe {
         this.classe = classe;
     }
 
+    /** Affichage lisible dans les listes deroulantes (JComboBox). */
     @Override
     public String toString() {
-        return prenom + " " + nom;
+        return prenom + " " + nom + " (" + matricule + ")";
     }
 }

@@ -1,21 +1,34 @@
-package models;
-import enums.Niveau;
-import jakarta.persistence.*;
+package sn.l2gl.aida.daara.model.models;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+/**
+ * Classe (halqa) encadree par un maitre.
+ * Cle primaire = code saisi par l'utilisateur (ex : "CL-DEB").
+ */
 @Entity
 @Table(name = "classes")
 public class Classe {
 
     @Id
-    @Column(length = 20)
-    private String code;
+    @Column(length = 200, unique = true)
+    private String code; // cle saisie
 
+    @Column(nullable = false)
     private String libelle;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Niveau niveau;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false) // une classe est encadree par 1 maitre
     @JoinColumn(name = "maitre_matricule")
     private Maitre maitre;
 
@@ -61,8 +74,9 @@ public class Classe {
         this.maitre = maitre;
     }
 
+    /** Affichage lisible dans les listes deroulantes (JComboBox). */
     @Override
     public String toString() {
-        return libelle;
+        return libelle + " (" + code + ")";
     }
 }
